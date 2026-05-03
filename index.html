@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FabCoWork - 製造業のためのAIコワーカー</title>
+  <title>FabCoWork - ロボット導入のためのAIコワーカー</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -404,89 +404,196 @@
 
     const DxfPreview = () => (
       <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 w-full h-full p-3" stroke="#10b981" fill="none" strokeWidth="0.5">
+        {/* Outer drawing frame + title block */}
         <rect x="20" y="20" width="160" height="160" stroke="#475569" strokeWidth="0.4"/>
-        <rect x="120" y="155" width="60" height="25" stroke="#475569" strokeWidth="0.3"/>
-        <line x1="120" y1="165" x2="180" y2="165" stroke="#475569" strokeWidth="0.3"/>
+        <rect x="118" y="155" width="62" height="25" stroke="#475569" strokeWidth="0.3"/>
+        <line x1="118" y1="165" x2="180" y2="165" stroke="#475569" strokeWidth="0.3"/>
         <line x1="150" y1="155" x2="150" y2="180" stroke="#475569" strokeWidth="0.3"/>
-        <rect x="60" y="60" width="80" height="80" stroke="#10b981" strokeWidth="0.7"/>
-        <circle cx="100" cy="100" r="18" stroke="#10b981" strokeWidth="0.7"/>
-        <circle cx="100" cy="100" r="6" stroke="#10b981" strokeWidth="0.6"/>
-        <circle cx="70" cy="70" r="3" stroke="#10b981" strokeWidth="0.5"/>
-        <circle cx="130" cy="70" r="3" stroke="#10b981" strokeWidth="0.5"/>
-        <circle cx="70" cy="130" r="3" stroke="#10b981" strokeWidth="0.5"/>
-        <circle cx="130" cy="130" r="3" stroke="#10b981" strokeWidth="0.5"/>
-        <line x1="40" y1="100" x2="160" y2="100" stroke="#64748b" strokeDasharray="2 1.5" strokeWidth="0.25"/>
-        <line x1="100" y1="40" x2="100" y2="160" stroke="#64748b" strokeDasharray="2 1.5" strokeWidth="0.25"/>
-        <line x1="60" y1="48" x2="140" y2="48" stroke="#94a3b8" strokeWidth="0.25"/>
-        <line x1="60" y1="46" x2="60" y2="50" stroke="#94a3b8" strokeWidth="0.25"/>
-        <line x1="140" y1="46" x2="140" y2="50" stroke="#94a3b8" strokeWidth="0.25"/>
-        <text x="100" y="46" textAnchor="middle" fill="#cbd5e1" fontSize="4.5" stroke="none">80</text>
-        <line x1="152" y1="60" x2="152" y2="140" stroke="#94a3b8" strokeWidth="0.25"/>
-        <line x1="150" y1="60" x2="154" y2="60" stroke="#94a3b8" strokeWidth="0.25"/>
-        <line x1="150" y1="140" x2="154" y2="140" stroke="#94a3b8" strokeWidth="0.25"/>
-        <text x="156" y="102" fill="#cbd5e1" fontSize="4.5" stroke="none">80</text>
-        <text x="100" y="103" textAnchor="middle" fill="#10b981" fontSize="3.5" stroke="none">⌀12</text>
-        <text x="100" y="124" textAnchor="middle" fill="#10b981" fontSize="3.5" stroke="none">⌀36</text>
-        <text x="122" y="161" fill="#94a3b8" fontSize="2.8" stroke="none">DRAWING</text>
-        <text x="122" y="172" fill="#94a3b8" fontSize="2.8" stroke="none">bracket_a03</text>
-        <text x="152" y="172" fill="#94a3b8" fontSize="2.8" stroke="none">A4 1:1</text>
+
+        {/* Mounting flange (top-down view, ISO 9409-1-A50) */}
+        <circle cx="100" cy="60" r="22" stroke="#10b981" strokeWidth="0.7"/>
+        <circle cx="100" cy="60" r="8" stroke="#10b981" strokeWidth="0.6"/>
+        {/* PCD bolt holes (M6 x 4 on ⌀50) */}
+        <circle cx="100" cy="60" r="14" stroke="#64748b" strokeWidth="0.25" strokeDasharray="2 1.2"/>
+        <circle cx="100" cy="46" r="2" stroke="#10b981" strokeWidth="0.5"/>
+        <circle cx="114" cy="60" r="2" stroke="#10b981" strokeWidth="0.5"/>
+        <circle cx="100" cy="74" r="2" stroke="#10b981" strokeWidth="0.5"/>
+        <circle cx="86"  cy="60" r="2" stroke="#10b981" strokeWidth="0.5"/>
+        <text x="125" y="38" fill="#10b981" fontSize="3.2" stroke="none">PCD ⌀50</text>
+        <text x="125" y="44" fill="#10b981" fontSize="3.2" stroke="none">M6 × 4</text>
+        <text x="100" y="62" textAnchor="middle" fill="#10b981" fontSize="3.2" stroke="none">⌀30</text>
+
+        {/* Connecting body (mounting flange to gripper body) */}
+        <line x1="92" y1="82" x2="92" y2="100" stroke="#10b981" strokeWidth="0.6"/>
+        <line x1="108" y1="82" x2="108" y2="100" stroke="#10b981" strokeWidth="0.6"/>
+
+        {/* Gripper body (front view) */}
+        <rect x="78" y="100" width="44" height="20" stroke="#10b981" strokeWidth="0.7"/>
+        <line x1="100" y1="100" x2="100" y2="120" stroke="#475569" strokeWidth="0.3" strokeDasharray="1.5 1"/>
+
+        {/* Gripper jaws (open) */}
+        <rect x="68" y="120" width="14" height="22" stroke="#10b981" strokeWidth="0.7"/>
+        <rect x="118" y="120" width="14" height="22" stroke="#10b981" strokeWidth="0.7"/>
+        {/* Stroke arrows */}
+        <line x1="60" y1="131" x2="78" y2="131" stroke="#94a3b8" strokeWidth="0.3"/>
+        <polyline points="60,131 64,128 64,134 60,131" stroke="#94a3b8" strokeWidth="0.3"/>
+        <line x1="122" y1="131" x2="140" y2="131" stroke="#94a3b8" strokeWidth="0.3"/>
+        <polyline points="140,131 136,128 136,134 140,131" stroke="#94a3b8" strokeWidth="0.3"/>
+        <text x="100" y="148" textAnchor="middle" fill="#10b981" fontSize="3.5" stroke="none">把持幅 80 ±0.05</text>
+
+        {/* Width dimension */}
+        <line x1="68" y1="116" x2="132" y2="116" stroke="#94a3b8" strokeWidth="0.25"/>
+        <line x1="68" y1="114" x2="68" y2="118" stroke="#94a3b8" strokeWidth="0.25"/>
+        <line x1="132" y1="114" x2="132" y2="118" stroke="#94a3b8" strokeWidth="0.25"/>
+        <text x="100" y="114" textAnchor="middle" fill="#cbd5e1" fontSize="3.8" stroke="none">64</text>
+
+        {/* Stroke annotation */}
+        <text x="40" y="131" fill="#10b981" fontSize="3.2" stroke="none">±15</text>
+
+        {/* Centerline */}
+        <line x1="100" y1="40" x2="100" y2="148" stroke="#64748b" strokeDasharray="2 1.5" strokeWidth="0.25"/>
+
+        {/* Title block text */}
+        <text x="120" y="161" fill="#94a3b8" fontSize="2.6" stroke="none">DRAWING</text>
+        <text x="120" y="172" fill="#94a3b8" fontSize="2.6" stroke="none">gripper_jig_v2</text>
+        <text x="152" y="172" fill="#94a3b8" fontSize="2.6" stroke="none">A4 1:1</text>
       </svg>
     );
 
-    const StepPreview = () => (
+    const ScenePreview = () => (
       <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 w-full h-full p-2">
         <defs>
-          <radialGradient id="flange-shade" cx="40%" cy="35%" r="80%">
-            <stop offset="0%" stopColor="#34d399" stopOpacity="0.85"/>
-            <stop offset="55%" stopColor="#0d9488" stopOpacity="0.75"/>
-            <stop offset="100%" stopColor="#064e3b" stopOpacity="0.85"/>
-          </radialGradient>
-          <radialGradient id="flange-inner" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#020617"/>
-            <stop offset="100%" stopColor="#022c22"/>
+          <linearGradient id="scn-belt" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#475569"/>
+            <stop offset="100%" stopColor="#1e293b"/>
+          </linearGradient>
+          <radialGradient id="scn-light" cx="50%" cy="0%" r="70%">
+            <stop offset="0%" stopColor="#34d399" stopOpacity="0.22"/>
+            <stop offset="100%" stopColor="#020617" stopOpacity="0"/>
           </radialGradient>
         </defs>
-        {/* Outer ring with perspective */}
-        <ellipse cx="100" cy="105" rx="72" ry="58" fill="url(#flange-shade)" stroke="#10b981" strokeWidth="0.4"/>
-        {/* Top edge highlight */}
-        <ellipse cx="100" cy="100" rx="72" ry="58" fill="none" stroke="#6ee7b7" strokeWidth="0.6" opacity="0.6"/>
-        {/* Connecting walls between top and bottom ellipse on sides */}
-        <path d="M 28 100 L 28 105 M 172 100 L 172 105" stroke="#10b981" strokeWidth="0.4"/>
-        {/* Inner hole */}
-        <ellipse cx="100" cy="100" rx="22" ry="18" fill="url(#flange-inner)" stroke="#10b981" strokeWidth="0.5"/>
-        <ellipse cx="100" cy="105" rx="22" ry="18" fill="none" stroke="#064e3b" strokeWidth="0.4" opacity="0.7"/>
-        {/* Bolt holes around the flange */}
-        {[0, 1, 2, 3, 4, 5].map(i => {
-          const angle = (i * 60 - 90) * Math.PI / 180;
-          const cx = 100 + 48 * Math.cos(angle);
-          const cy = 100 + 38 * Math.sin(angle);
-          return (
-            <g key={i}>
-              <ellipse cx={cx} cy={cy} rx="4" ry="3.2" fill="#020617" stroke="#10b981" strokeWidth="0.4"/>
-              <ellipse cx={cx} cy={cy + 1.2} rx="4" ry="3.2" fill="none" stroke="#064e3b" strokeWidth="0.3"/>
-            </g>
-          );
+
+        {/* Top light glow */}
+        <rect width="200" height="200" fill="url(#scn-light)"/>
+
+        {/* Floor with perspective */}
+        <polygon points="15,182 185,182 162,108 38,108" fill="#0f172a" stroke="#1e293b" strokeWidth="0.5"/>
+        {/* Floor grid */}
+        {[0.25, 0.5, 0.75].map((t, i) => {
+          const y = 108 + 74 * t;
+          const xL = 38 - 23 * t;
+          const xR = 162 + 23 * t;
+          return <line key={`h${i}`} x1={xL} y1={y} x2={xR} y2={y} stroke="#10b981" strokeOpacity="0.1" strokeWidth="0.3"/>;
         })}
+        {[0.2, 0.4, 0.6, 0.8].map((t, i) => {
+          const xT = 38 + 124 * t;
+          const xB = 15 + 170 * t;
+          return <line key={`v${i}`} x1={xT} y1="108" x2={xB} y2="182" stroke="#10b981" strokeOpacity="0.1" strokeWidth="0.3"/>;
+        })}
+
+        {/* Back wall hint */}
+        <rect x="38" y="48" width="124" height="60" fill="#0a0f1c" stroke="#1e293b" strokeWidth="0.3"/>
+
+        {/* Shelf unit 1 */}
+        <g>
+          <rect x="48" y="62" width="24" height="46" fill="#1e293b" stroke="#475569" strokeWidth="0.5"/>
+          <line x1="48" y1="74" x2="72" y2="74" stroke="#64748b" strokeWidth="0.4"/>
+          <line x1="48" y1="86" x2="72" y2="86" stroke="#64748b" strokeWidth="0.4"/>
+          <line x1="48" y1="98" x2="72" y2="98" stroke="#64748b" strokeWidth="0.4"/>
+          <rect x="51" y="65" width="6" height="6" fill="#f97316" opacity="0.75"/>
+          <rect x="60" y="65" width="6" height="6" fill="#3b82f6" opacity="0.75"/>
+          <rect x="51" y="77" width="6" height="6" fill="#3b82f6" opacity="0.6"/>
+          <rect x="60" y="89" width="6" height="6" fill="#f97316" opacity="0.55"/>
+        </g>
+        {/* Shelf unit 2 */}
+        <g>
+          <rect x="78" y="66" width="22" height="42" fill="#1e293b" stroke="#475569" strokeWidth="0.5"/>
+          <line x1="78" y1="77" x2="100" y2="77" stroke="#64748b" strokeWidth="0.4"/>
+          <line x1="78" y1="88" x2="100" y2="88" stroke="#64748b" strokeWidth="0.4"/>
+          <line x1="78" y1="99" x2="100" y2="99" stroke="#64748b" strokeWidth="0.4"/>
+          <rect x="81" y="69" width="5" height="6" fill="#3b82f6" opacity="0.7"/>
+          <rect x="90" y="80" width="5" height="6" fill="#10b981" opacity="0.6"/>
+        </g>
+
+        {/* Camera mount (top-right) */}
+        <g>
+          <line x1="170" y1="50" x2="170" y2="78" stroke="#475569" strokeWidth="0.5"/>
+          <rect x="166" y="78" width="8" height="5" fill="#0f172a" stroke="#10b981" strokeWidth="0.4"/>
+          <circle cx="170" cy="80.5" r="1.2" fill="#10b981"/>
+        </g>
+
+        {/* Conveyor 1 (rear) */}
+        <g>
+          <polygon points="100,112 162,112 166,124 102,124" fill="url(#scn-belt)" stroke="#64748b" strokeWidth="0.4"/>
+          <line x1="105" y1="116" x2="162" y2="116" stroke="#0f172a" strokeWidth="0.3"/>
+          <line x1="105" y1="120" x2="162" y2="120" stroke="#0f172a" strokeWidth="0.3"/>
+          <rect x="103" y="124" width="2.4" height="12" fill="#eab308"/>
+          <rect x="160" y="124" width="2.4" height="12" fill="#eab308"/>
+          <rect x="115" y="106" width="9" height="6" fill="#f97316" stroke="#7c2d12" strokeWidth="0.3"/>
+          <rect x="135" y="106" width="9" height="6" fill="#3b82f6" stroke="#1e3a8a" strokeWidth="0.3"/>
+        </g>
+
+        {/* Conveyor 2 (front, larger) */}
+        <g>
+          <polygon points="50,148 162,148 170,164 44,164" fill="url(#scn-belt)" stroke="#94a3b8" strokeWidth="0.5"/>
+          <line x1="55" y1="153" x2="163" y2="153" stroke="#0f172a" strokeWidth="0.3"/>
+          <line x1="55" y1="157" x2="163" y2="157" stroke="#0f172a" strokeWidth="0.3"/>
+          <line x1="55" y1="161" x2="163" y2="161" stroke="#0f172a" strokeWidth="0.3"/>
+          <rect x="46" y="164" width="3" height="14" fill="#eab308"/>
+          <rect x="162" y="164" width="3" height="14" fill="#eab308"/>
+          <rect x="105" y="164" width="3" height="14" fill="#ca8a04"/>
+          <rect x="68" y="139" width="13" height="9" fill="#f97316" stroke="#7c2d12" strokeWidth="0.4"/>
+          <rect x="100" y="139" width="13" height="9" fill="#3b82f6" stroke="#1e3a8a" strokeWidth="0.4"/>
+          <rect x="132" y="139" width="13" height="9" fill="#10b981" stroke="#065f46" strokeWidth="0.4"/>
+        </g>
+
+        {/* Robot arm (line-based, joint coords explicit) */}
+        {/* J1=shoulder, J2=elbow, J3=wrist, EE=tip */}
+        {/* Base at (112, 124) */}
+        <ellipse cx="112" cy="124" rx="10" ry="3" fill="#0f172a" stroke="#475569" strokeWidth="0.4"/>
+        <rect x="105" y="116" width="14" height="9" fill="#1e293b" stroke="#475569" strokeWidth="0.4"/>
+        {/* Upper arm: shoulder (112,116) → elbow (98, 96) */}
+        <line x1="112" y1="116" x2="98" y2="96" stroke="#1e293b" strokeWidth="6" strokeLinecap="round"/>
+        <line x1="112" y1="116" x2="98" y2="96" stroke="#94a3b8" strokeWidth="4" strokeLinecap="round"/>
+        {/* Forearm: elbow (98, 96) → wrist (122, 86) */}
+        <line x1="98" y1="96" x2="122" y2="86" stroke="#1e293b" strokeWidth="5" strokeLinecap="round"/>
+        <line x1="98" y1="96" x2="122" y2="86" stroke="#cbd5e1" strokeWidth="3" strokeLinecap="round"/>
+        {/* Joints */}
+        <circle cx="112" cy="116" r="3" fill="#475569" stroke="#94a3b8" strokeWidth="0.4"/>
+        <circle cx="98" cy="96" r="2.5" fill="#475569" stroke="#94a3b8" strokeWidth="0.4"/>
+        {/* End effector */}
+        <circle cx="122" cy="86" r="2.2" fill="#0f172a" stroke="#10b981" strokeWidth="0.5"/>
+        <rect x="120" y="88" width="1.2" height="4" fill="#10b981"/>
+        <rect x="122.8" y="88" width="1.2" height="4" fill="#10b981"/>
+
+        {/* Work table front-right */}
+        <g transform="translate(155, 168)">
+          <polygon points="0,0 22,0 26,9 -4,9" fill="#a16207" stroke="#451a03" strokeWidth="0.4"/>
+          <rect x="0" y="9" width="2" height="10" fill="#451a03"/>
+          <rect x="20" y="9" width="2" height="10" fill="#451a03"/>
+          <rect x="6" y="-5" width="9" height="6" fill="#3b82f6" stroke="#1e3a8a" strokeWidth="0.4"/>
+        </g>
+
         {/* Axis triad */}
-        <g transform="translate(20, 175)">
-          <line x1="0" y1="0" x2="14" y2="0" stroke="#ef4444" strokeWidth="0.8"/>
-          <text x="16" y="2" fill="#ef4444" fontSize="4">X</text>
-          <line x1="0" y1="0" x2="0" y2="-14" stroke="#22c55e" strokeWidth="0.8"/>
-          <text x="2" y="-15" fill="#22c55e" fontSize="4">Y</text>
-          <line x1="0" y1="0" x2="-9" y2="6" stroke="#3b82f6" strokeWidth="0.8"/>
-          <text x="-13" y="10" fill="#3b82f6" fontSize="4">Z</text>
+        <g transform="translate(20, 188)">
+          <line x1="0" y1="0" x2="12" y2="0" stroke="#ef4444" strokeWidth="0.8"/>
+          <text x="14" y="2" fill="#ef4444" fontSize="4">X</text>
+          <line x1="0" y1="0" x2="0" y2="-12" stroke="#22c55e" strokeWidth="0.8"/>
+          <text x="2" y="-13" fill="#22c55e" fontSize="4">Y</text>
+          <line x1="0" y1="0" x2="-8" y2="5" stroke="#3b82f6" strokeWidth="0.8"/>
+          <text x="-12" y="9" fill="#3b82f6" fontSize="4">Z</text>
         </g>
       </svg>
     );
 
     const XlsxPreview = () => {
       const rows = [
-        ['BR-001', 'ブラケット A03',  'A6063-T5', 1,  1200, 1200],
-        ['FL-003', 'フランジ V3',      'SUS304',   2,  3400, 6800],
-        ['HG-002', 'ハウジング',       'A5052',    1,  2800, 2800],
-        ['BT-M6',  'M6 ボルト',        'SS400',   12,    45,  540],
-        ['NT-M6',  'M6 ナット',        'SS400',   12,    30,  360],
-        ['WS-M6',  'M6 ワッシャー',    'SUS304',  24,    15,  360],
+        ['RB-001', '6軸ロボットアーム', '本体',         1, 2400000, 2400000],
+        ['GR-002', '電動グリッパー',     'エンドエフェクタ', 1,  850000,  850000],
+        ['CV-101', 'コンベア (3m)',     '搬送設備',      2,  600000, 1200000],
+        ['CM-003', '検査カメラ一式',     '画像処理',      1,  720000,  720000],
+        ['SF-001', '安全フェンス',       '安全装置',      1,  480000,  480000],
+        ['CT-200', '制御盤・配線',       '制御',         1, 1170000, 1170000],
       ];
       const total = rows.reduce((s, r) => s + r[5], 0);
       const yen = (n) => '¥' + n.toLocaleString();
@@ -497,7 +604,7 @@
             {/* Title bar */}
             <div className="bg-[#107c41] text-white px-2.5 py-1 text-[9px] flex items-center gap-1.5">
               <Icon name="FileSpreadsheet" size={11} className="text-white"/>
-              <span className="font-semibold">parts_list.xlsx</span>
+              <span className="font-semibold">equipment_bom.xlsx</span>
               <span className="opacity-70 ml-auto text-[8px]">Sheet1</span>
             </div>
             {/* Formula bar */}
@@ -522,7 +629,7 @@
                     <td className="border border-slate-300 text-center text-slate-500 bg-slate-100 text-[7px]">1</td>
                     <td className="border border-slate-300 px-1 py-0.5 font-bold">品番</td>
                     <td className="border border-slate-300 px-1 py-0.5 font-bold">品名</td>
-                    <td className="border border-slate-300 px-1 py-0.5 font-bold">材質</td>
+                    <td className="border border-slate-300 px-1 py-0.5 font-bold">区分</td>
                     <td className="border border-slate-300 px-1 py-0.5 font-bold text-right">数量</td>
                     <td className="border border-slate-300 px-1 py-0.5 font-bold text-right">単価</td>
                     <td className="border border-slate-300 px-1 py-0.5 font-bold text-right">金額</td>
@@ -561,117 +668,149 @@
             </div>
             {/* Sheet tabs */}
             <div className="border-t border-slate-300 bg-slate-50 px-2 py-0.5 text-[8px] flex gap-1">
-              <span className="px-2 py-0.5 bg-white border-t-2 border-emerald-600 text-slate-700 font-medium">部品表</span>
+              <span className="px-2 py-0.5 bg-white border-t-2 border-emerald-600 text-slate-700 font-medium">設備BOM</span>
               <span className="px-2 py-0.5 text-slate-500">原価計算</span>
-              <span className="px-2 py-0.5 text-slate-500">検査記録</span>
+              <span className="px-2 py-0.5 text-slate-500">サイクルタイム</span>
             </div>
           </div>
         </div>
       );
     };
 
-    const PdfPreview = () => (
-      <div className="absolute inset-0 p-3 overflow-hidden">
-        <div className="h-full bg-slate-100 rounded-sm shadow-2xl text-slate-900 p-5 text-[9px] leading-snug font-sans overflow-hidden">
-          <div className="border-b border-slate-300 pb-2 mb-3">
-            <div className="text-[10px] font-bold text-slate-900">技術仕様書 / Technical Specification</div>
-            <div className="text-[8px] text-slate-500 mt-0.5">Document No. SPEC-2026-0428 / Rev. 03</div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <div className="text-[9px] font-semibold mb-1 text-slate-800">1. 製品概要</div>
-              <p className="text-slate-600 mb-2 text-[8px] leading-relaxed">
-                本仕様書は EV 電池トレイ用フランジ部品の設計要件を定める。材質は A6063-T5 アルミ合金とし、表面処理はアルマイト処理を施す。
-              </p>
-              <div className="text-[9px] font-semibold mb-1 text-slate-800">2. 寸法要件</div>
-              <table className="w-full border-collapse text-[8px] mb-2">
-                <thead>
-                  <tr className="bg-slate-200 text-slate-700">
-                    <th className="border border-slate-300 px-1 py-0.5 text-left">項目</th>
-                    <th className="border border-slate-300 px-1 py-0.5 text-left">値</th>
-                  </tr>
-                </thead>
-                <tbody className="text-slate-600">
-                  <tr><td className="border border-slate-300 px-1">外径</td><td className="border border-slate-300 px-1">⌀120 ±0.05</td></tr>
-                  <tr><td className="border border-slate-300 px-1">内径</td><td className="border border-slate-300 px-1">⌀36 +0.02 / 0</td></tr>
-                  <tr><td className="border border-slate-300 px-1">厚さ</td><td className="border border-slate-300 px-1">8.0 ±0.1</td></tr>
-                  <tr><td className="border border-slate-300 px-1">ボルト穴</td><td className="border border-slate-300 px-1">M6 × 6箇所</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div>
-              <div className="text-[9px] font-semibold mb-1 text-slate-800">3. 公差・表面性状</div>
-              <p className="text-slate-600 text-[8px] leading-relaxed mb-2">
-                指示なき寸法公差は JIS B 0405 中級とする。穴位置度公差は ⌀0.1 (M)。表面粗さは Ra1.6 を標準。
-              </p>
-              <div className="text-[9px] font-semibold mb-1 text-slate-800">4. 検査要領</div>
-              <ul className="text-slate-600 text-[8px] list-disc pl-3 space-y-0.5">
-                <li>抜き取り検査 (AQL 1.0)</li>
-                <li>三次元測定機による寸法検査</li>
-                <li>外観: 傷・打痕なきこと</li>
-              </ul>
-            </div>
-          </div>
-          <div className="absolute bottom-3 right-5 text-[7px] text-slate-400">Page 1 / 4</div>
-        </div>
-      </div>
-    );
+    const UrdfPreview = () => {
+      // Joint coordinates in viewBox space — declared as constants so links connect.
+      const J1 = { x: 100, y: 152 }; // shoulder (rotation point)
+      const J2 = { x:  68, y:  98 }; // elbow
+      const J3 = { x: 138, y:  78 }; // wrist
+      const EE = { x: 138, y: 100 }; // end effector tip
+
+      return (
+        <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 w-full h-full p-2">
+          <defs>
+            <radialGradient id="urdf-base" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#94a3b8"/>
+              <stop offset="100%" stopColor="#1e293b"/>
+            </radialGradient>
+          </defs>
+
+          {/* Reach circles (faint dashed) */}
+          <circle cx={J1.x} cy={J1.y} r="72" fill="none" stroke="#10b981" strokeOpacity="0.18" strokeWidth="0.5" strokeDasharray="3 2"/>
+          <circle cx={J1.x} cy={J1.y} r="50" fill="none" stroke="#10b981" strokeOpacity="0.15" strokeWidth="0.4" strokeDasharray="2 2"/>
+
+          {/* Floor line */}
+          <line x1="20" y1="178" x2="180" y2="178" stroke="#475569" strokeWidth="0.4" strokeDasharray="2 1.5"/>
+
+          {/* Base block */}
+          <ellipse cx={J1.x} cy="172" rx="22" ry="5" fill="#0f172a" stroke="#475569" strokeWidth="0.5"/>
+          <rect x={J1.x - 20} y="156" width="40" height="18" fill="url(#urdf-base)" stroke="#475569" strokeWidth="0.5"/>
+          <ellipse cx={J1.x} cy="156" rx="20" ry="4" fill="#0f172a" stroke="#10b981" strokeWidth="0.4"/>
+
+          {/* Link 1: shoulder → elbow (3-layer for tube look) */}
+          <line x1={J1.x} y1={J1.y} x2={J2.x} y2={J2.y} stroke="#1e293b" strokeWidth="13" strokeLinecap="round"/>
+          <line x1={J1.x} y1={J1.y} x2={J2.x} y2={J2.y} stroke="#94a3b8" strokeWidth="9" strokeLinecap="round"/>
+          <line x1={J1.x} y1={J1.y} x2={J2.x} y2={J2.y} stroke="#cbd5e1" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+
+          {/* Link 2: elbow → wrist */}
+          <line x1={J2.x} y1={J2.y} x2={J3.x} y2={J3.y} stroke="#1e293b" strokeWidth="11" strokeLinecap="round"/>
+          <line x1={J2.x} y1={J2.y} x2={J3.x} y2={J3.y} stroke="#94a3b8" strokeWidth="7.5" strokeLinecap="round"/>
+          <line x1={J2.x} y1={J2.y} x2={J3.x} y2={J3.y} stroke="#cbd5e1" strokeWidth="1.6" strokeLinecap="round" opacity="0.6"/>
+
+          {/* Link 3: wrist → end effector (vertical, hanging down) */}
+          <line x1={J3.x} y1={J3.y} x2={EE.x} y2={EE.y} stroke="#1e293b" strokeWidth="8" strokeLinecap="round"/>
+          <line x1={J3.x} y1={J3.y} x2={EE.x} y2={EE.y} stroke="#475569" strokeWidth="5.5" strokeLinecap="round"/>
+
+          {/* J1 shoulder joint (above base) */}
+          <circle cx={J1.x} cy={J1.y} r="9" fill="#0f172a" stroke="#475569" strokeWidth="0.5"/>
+          <circle cx={J1.x} cy={J1.y} r="6" fill="none" stroke="#10b981" strokeWidth="0.4"/>
+          <text x={J1.x} y={J1.y + 1.5} textAnchor="middle" fill="#10b981" fontSize="4" fontFamily="monospace">J1</text>
+
+          {/* J2 elbow */}
+          <circle cx={J2.x} cy={J2.y} r="7" fill="#0f172a" stroke="#475569" strokeWidth="0.5"/>
+          <circle cx={J2.x} cy={J2.y} r="4.5" fill="none" stroke="#10b981" strokeWidth="0.4"/>
+          <text x={J2.x} y={J2.y + 1.2} textAnchor="middle" fill="#10b981" fontSize="3" fontFamily="monospace">J2</text>
+
+          {/* J3 wrist */}
+          <circle cx={J3.x} cy={J3.y} r="5.5" fill="#0f172a" stroke="#475569" strokeWidth="0.4"/>
+          <circle cx={J3.x} cy={J3.y} r="3.5" fill="none" stroke="#10b981" strokeWidth="0.3"/>
+          <text x={J3.x} y={J3.y + 1} textAnchor="middle" fill="#10b981" fontSize="2.6" fontFamily="monospace">J3</text>
+
+          {/* End effector / gripper at EE */}
+          <circle cx={EE.x} cy={EE.y - 1} r="3.5" fill="#0f172a" stroke="#10b981" strokeWidth="0.4"/>
+          <rect x={EE.x - 5} y={EE.y + 2} width="2" height="7" fill="#10b981"/>
+          <rect x={EE.x + 3} y={EE.y + 2} width="2" height="7" fill="#10b981"/>
+
+          {/* Reach annotation */}
+          <text x="178" y="48" textAnchor="end" fill="#10b981" fontSize="4" opacity="0.7" fontFamily="monospace">reach 1300mm</text>
+          <text x="178" y="56" textAnchor="end" fill="#94a3b8" fontSize="3.5" opacity="0.7" fontFamily="monospace">payload 12.5kg</text>
+
+          {/* Axis triad */}
+          <g transform="translate(20, 175)">
+            <line x1="0" y1="0" x2="14" y2="0" stroke="#ef4444" strokeWidth="0.8"/>
+            <text x="16" y="2" fill="#ef4444" fontSize="4">X</text>
+            <line x1="0" y1="0" x2="0" y2="-14" stroke="#22c55e" strokeWidth="0.8"/>
+            <text x="2" y="-15" fill="#22c55e" fontSize="4">Y</text>
+            <line x1="0" y1="0" x2="-9" y2="6" stroke="#3b82f6" strokeWidth="0.8"/>
+            <text x="-13" y="10" fill="#3b82f6" fontSize="4">Z</text>
+          </g>
+        </svg>
+      );
+    };
 
     const PROJECTS = [
-      { name: 'Bracket-A03', active: true },
-      { name: 'Flange-2026', active: false },
-      { name: 'EV-Tray-X1', active: false },
-      { name: 'Gear-Train', active: false },
+      { name: 'PickPlace_A1', active: true },
+      { name: '外観検査セル', active: false },
+      { name: '倉庫AMR導入', active: false },
+      { name: 'パレタイズ_X1', active: false },
     ];
 
     const FILES = [
       {
-        name: 'bracket_a03.dxf',
-        icon: 'FileCode2',
-        label: '2D図面 (DXF)',
-        kind: 'dxf',
-        userPrompt: '@bracket_a03.dxf を開いて、加工に必要な寸法と公差をすべて抽出してください。',
+        name: 'factory_line.usda',
+        icon: 'Box',
+        label: '3Dシーン',
+        kind: 'scene',
+        userPrompt: 'コンベア2本と6軸アーム1台、検査カメラを置いたピック＆プレースのラインを作ってください。',
         actions: [
-          { name: 'read_dxf', cmd: 'cad.read("drawings/bracket_a03.dxf")' },
+          { name: 'create_scene', cmd: 'sim.create_scene("factory_line")' },
+          { name: 'place_assets', cmd: 'sim.place(["conveyor x2","robot_arm","camera","shelf x2"])' },
+        ],
+        response: 'ピック＆プレースのラインを構築しました。コンベア×2、6軸アーム×1、検査カメラ×1、棚×2、製品箱、作業台を配置。3Dビューアで動作シミュレーションをご確認ください。',
+      },
+      {
+        name: 'pickup_robot.urdf',
+        icon: 'Bot',
+        label: 'ロボット',
+        kind: 'urdf',
+        userPrompt: '@pickup_robot.urdf を読み込んで、リーチと可搬重量、想定サイクルタイムをまとめてください。',
+        actions: [
+          { name: 'load_robot', cmd: 'robot.load("models/pickup_robot.urdf")' },
+          { name: 'analyze_specs', cmd: 'robot.summary(reach=True, payload=True, cycle=True)' },
+        ],
+        response: 'リーチ 1300mm、可搬重量 12.5kg、繰り返し精度 ±0.05mm、想定サイクルタイム 4.2 秒/個。可動範囲は球状で死角なし。安全距離 600mm を確保すれば現行レイアウトに配置可能です。',
+      },
+      {
+        name: 'gripper_jig_v2.dxf',
+        icon: 'FileCode2',
+        label: '治具図面',
+        kind: 'dxf',
+        userPrompt: '@gripper_jig_v2.dxf を確認して、ロボット先端への取付寸法と把持幅を抽出してください。',
+        actions: [
+          { name: 'read_dxf', cmd: 'cad.read("drawings/gripper_jig_v2.dxf")' },
           { name: 'extract_dimensions', cmd: 'cad.extract_dimensions(layer="DIM")' },
         ],
-        response: '寸法 7 件 / 幾何公差 4 件を抽出しました。外形 80×80、中央穴 ⌀36 H7、M6 取付穴 ×4 (位置度 ⌀0.1 (M))、表面粗さ Ra1.6。サイドペインに一覧化しています。',
+        response: '取付フランジ ISO 9409-1-A50 準拠 (M6 × 4、PCD ⌀50)、把持幅 80mm、ストローク ±15mm、公差 ±0.05。寸法と公差をサイドペインに整理しました。',
       },
       {
-        name: 'flange_v3.step',
-        icon: 'Box',
-        label: '3Dモデル (STEP)',
-        kind: 'step',
-        userPrompt: '@flange_v3.step を開いて、ボルト穴の配置と PCD を確認したいです。',
-        actions: [
-          { name: 'load_step', cmd: 'cad.load("models/flange_v3.step")' },
-          { name: 'detect_features', cmd: 'cad.find_holes() | cad.measure_pcd()' },
-        ],
-        response: '貫通穴を 6 箇所検出。⌀6.5mm、PCD 96mm に 60° 等配です。重心は座標系原点と一致、軸対称性に問題はありません。',
-      },
-      {
-        name: 'spec_sheet.pdf',
-        icon: 'FileText',
-        label: '仕様書 (PDF)',
-        kind: 'pdf',
-        userPrompt: '@spec_sheet.pdf から見積もりに必要な情報をリストアップしてください。',
-        actions: [
-          { name: 'parse_pdf', cmd: 'pdf.read("docs/spec_sheet.pdf")' },
-          { name: 'extract_requirements', cmd: 'llm.extract(["材質","公差","表面処理","検査"])' },
-        ],
-        response: '材質 A6063-T5 / アルマイト処理、寸法公差 JIS B 0405 中級、位置度 ⌀0.1 (M)、表面粗さ Ra1.6、検査 AQL 1.0 + 三次元測定。要点を表に整理しました。',
-      },
-      {
-        name: 'parts_list.xlsx',
+        name: 'equipment_bom.xlsx',
         icon: 'FileSpreadsheet',
-        label: '部品表 (Excel)',
+        label: '設備BOM',
         kind: 'xlsx',
-        userPrompt: '@parts_list.xlsx の合計が予算 ¥10,000 を超えています。コスト削減案を出してください。',
+        userPrompt: '@equipment_bom.xlsx の合計が予算 ¥6,000,000 を超えています。コスト削減案を出してください。',
         actions: [
-          { name: 'read_xlsx', cmd: 'xlsx.read("docs/parts_list.xlsx", sheet="部品表")' },
-          { name: 'optimize_cost', cmd: 'analyze.suggest_alternatives(target=10000)' },
+          { name: 'read_xlsx', cmd: 'xlsx.read("docs/equipment_bom.xlsx")' },
+          { name: 'optimize_cost', cmd: 'analyze.suggest_alternatives(target=6000000)' },
         ],
-        response: '合計 ¥12,060（予算超過 ¥2,060）。フランジ V3 を SUS304→A5052 に変更で −¥3,400 を試算。代替材候補を D 列にドラフト追記しました。',
+        response: '合計 ¥6,820,000（予算超過 ¥820,000）。グリッパーを電動式→空気式に変更で −¥350,000、検査カメラを汎用 GigE に変更で −¥480,000。代替案を G 列に追記しました。',
       },
     ];
 
@@ -688,8 +827,8 @@
       }, [selectedIdx]);
 
       const current = FILES[selectedIdx];
-      const tabLabel = current.kind === 'dxf' ? '2D' : current.kind === 'step' ? '3D' : current.kind === 'xlsx' ? 'XLSX' : 'PDF';
-      const isDocLike = current.kind === 'pdf' || current.kind === 'xlsx';
+      const tabLabel = current.kind === 'dxf' ? '2D' : current.kind === 'scene' ? 'SCENE' : current.kind === 'urdf' ? 'ROBOT' : 'XLSX';
+      const isDocLike = current.kind === 'xlsx';
 
       return (
         <div className="relative rounded-xl overflow-hidden flex flex-col md:flex-row h-[560px] md:h-[640px] w-full max-w-5xl mx-auto mt-12 text-left bg-slate-900 border border-slate-700 shadow-[0_0_0_1px_rgba(16,185,129,0.08),0_30px_80px_-20px_rgba(16,185,129,0.25),0_25px_50px_-12px_rgba(0,0,0,0.6)] ring-1 ring-emerald-500/10">
@@ -822,15 +961,15 @@
               )}
               <div key={`viewer-${selectedIdx}`} className="viewer-fade absolute inset-0">
                 {current.kind === 'dxf' && <DxfPreview />}
-                {current.kind === 'step' && <StepPreview />}
-                {current.kind === 'pdf' && <PdfPreview />}
+                {current.kind === 'scene' && <ScenePreview />}
+                {current.kind === 'urdf' && <UrdfPreview />}
                 {current.kind === 'xlsx' && <XlsxPreview />}
               </div>
               {!isDocLike && (
                 <div className="absolute top-2 left-2 flex gap-1 bg-slate-900/80 backdrop-blur border border-slate-800 rounded px-1.5 py-1">
                   <span className="text-emerald-400 text-[10px] px-1">100%</span>
                   <span className="text-slate-500 text-[10px] px-1 border-l border-slate-700">
-                    {current.kind === 'dxf' ? 'Layer: All' : 'View: ISO'}
+                    {current.kind === 'dxf' ? 'Layer: All' : current.kind === 'scene' ? 'View: ISO' : 'Joint: Home'}
                   </span>
                 </div>
               )}
@@ -850,12 +989,12 @@
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-              製造業のための<br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">AIコワーカー。</span>
+              ロボット導入のための<br className="md:hidden" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">AIコワーカー。</span>
             </h1>
 
             <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-slate-300 mb-10 leading-relaxed">
-              図面確認も、データ変換も、チャット一つで。<br/>
-              CAD・PDFビューアと自律型AIエージェントが統合された、<br className="hidden md:block"/>新しいデスクトップ・ワークスペース。
+              ライン構成も、ロボットレイアウトも、チャット一つで。<br/>
+              AIエージェントが3Dシミュレーション環境を自動構築する、<br className="hidden md:block"/>設備導入のためのデスクトップ・ワークスペース。
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -876,19 +1015,19 @@
     const Features = () => {
       const features = [
         {
-          icon: <Icon name="Layers" className="text-emerald-500" size={24} />,
-          title: "究極の統合ビューア",
-          description: "重い専用ソフトを立ち上げる必要はありません。DXF、STEP、PDFなど製造業に不可欠なファイルを一つのアプリでサクサク閲覧。レイヤー操作や3Dの視点変更も思いのままです。"
+          icon: <Icon name="Box" className="text-emerald-500" size={24} />,
+          title: "3Dラインを、話すだけで構築",
+          description: "「コンベア2本と検査ロボットを置いたラインを作って」とチャットで指示するだけ。AIが工場のレイアウトを瞬時に立ち上げ、何度でも作り直せます。検討の往復が一段速くなります。"
         },
         {
           icon: <Icon name="Bot" className="text-teal-500" size={24} />,
-          title: "自然言語で動くAIエージェント",
-          description: "「この図面を画像にして」「仕様書から寸法要件をリストアップして」とチャットで指示するだけ。AIが背後でPythonスクリプトを生成・実行し、タスクを自律的に完了させます。"
+          title: "選定もレイアウトも、AIが伴走",
+          description: "リーチ、可搬重量、サイクルタイム、安全距離。判断に必要な数字をAIが即座に試算します。「もう1台増やしたら？」「アームを変えたら？」も、その場でシミュレーションして答えます。"
         },
         {
-          icon: <Icon name="Shield" className="text-cyan-500" size={24} />,
-          title: "ローカルとSaaSの融合",
-          description: "ローカルPCのディレクトリ構造をそのまま利用可能。機密性の高いファイルは手元に置いたまま、AIの強力な推論能力だけをクラウドから引き出すセキュアな設計です。"
+          icon: <Icon name="Layers" className="text-cyan-500" size={24} />,
+          title: "図面・仕様書もまとめて1画面",
+          description: "ロボット周辺の治具図面、設備BOM、仕様書も同じ画面で扱えます。バラバラのツールを行き来せず、ロボット導入PJに必要な情報をAIと一緒にさばけます。"
         }
       ];
 
@@ -897,10 +1036,10 @@
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
-                設計・製造データを、もっと自由に。
+                ロボット導入の検討を、もっと身軽に。
               </h2>
               <p className="text-lg text-slate-600">
-                データの確認から変換、要約まで。ツールの壁を越えて、あなたの業務をAIがシームレスにアシストします。
+                ライン設計の試行錯誤から、客先提案、見積もりの整理まで。AIが設備導入の進め方そのものをアップデートします。
               </p>
             </div>
 
@@ -923,29 +1062,29 @@
     };
 
     const UseCases = () => {
-      const [activeTab, setActiveTab] = useState('engineer');
+      const [activeTab, setActiveTab] = useState('sier');
 
       const cases = {
-        engineer: {
-          icon: <Icon name="PenTool" size={20}/>,
-          title: "設計エンジニア",
-          heading: "過去の図面探しとリファレンス確認を瞬時に",
-          desc: "「あの時の部品の寸法、どうなってたっけ？」\nわざわざCADを起動しなくても、FabCoWorkなら一瞬でDXF/STEPをプレビュー。さらにAIに頼んでPDFの技術論文や仕様書を要約させながら、同じ画面で設計構想を練ることができます。",
-          tags: ["CADプレビュー", "仕様書要約", "Pythonスクリプト実行"]
+        sier: {
+          icon: <Icon name="Building" size={20}/>,
+          title: "ロボットSIer",
+          heading: "客先ヒアリングから、3Dラインを当日中に",
+          desc: "「もう少しロボットを左にずらしたら？」「コンベアを長くしたら？」\nお客様の要望に合わせ、その場でラインを組み替えてシミュレーション。提案までのリードタイムが大幅に短くなります。",
+          tags: ["ライン構築", "動作確認", "提案資料作成"]
+        },
+        production: {
+          icon: <Icon name="Cpu" size={20}/>,
+          title: "生産技術エンジニア",
+          heading: "新ライン検討の試行錯誤を、社内で完結",
+          desc: "新製品の組立ライン企画段階で、「ロボットを入れるとして、何台必要？レイアウトはどうなる？」をAIに相談しながら詰められます。投資判断のための材料が、その日のうちに揃います。",
+          tags: ["レイアウト検討", "投資効果試算", "事前検証"]
         },
         sales: {
-          icon: <Icon name="Building" size={20}/>,
-          title: "営業",
-          heading: "客先での素早い提案と資料作成",
-          desc: "出先で顧客から「この図面、資料に貼りたいんだけど」と言われても焦る必要はありません。\nノートPCを開き、チャットで「このDXFをパワポ用に背景透過PNGにして」と指示するだけで、即座に顧客へ提供できます。",
-          tags: ["フォーマット変換", "3Dモデル提示", "即時対応"]
-        },
-        estimator: {
-          icon: <Icon name="Calculator" size={20}/>,
-          title: "見積もり担当",
-          heading: "図面からの情報抽出をAIがアシスト",
-          desc: "大量のPDF図面やDXFデータから、見積もりに必要な寸法、公差、表面処理の指示などを拾い出す作業。AIに「図面内の加工要件をリストアップして」と指示し、ビューアで確認しながら抜け漏れのない見積もりを作成できます。",
-          tags: ["要件抽出", "データ整理", "見落とし防止"]
+          icon: <Icon name="PenTool" size={20}/>,
+          title: "営業エンジニア",
+          heading: "提案書に「動くシミュレーション」を",
+          desc: "客先で「これをロボット化できますか？」と聞かれたら、ノートPCを開いてその場でラインを組み立てる。3Dで動くシーンと一緒に提案できれば、競合との差は歴然です。",
+          tags: ["即時提案", "3Dビジュアル", "受注率向上"]
         }
       };
 
@@ -954,10 +1093,10 @@
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
-                あらゆる職種の「面倒」を解決
+                ロボット導入に関わる、あらゆる職種に。
               </h2>
               <p className="text-lg text-slate-600">
-                製造業に携わる様々なポジションで、FabCoWorkは強力な相棒となります。
+                SIerから生産技術、営業エンジニアまで。FabCoWorkはロボット導入PJの強力な相棒となります。
               </p>
             </div>
 
@@ -1016,19 +1155,19 @@
           icon: 'PenTool',
           title: 'お問い合わせ・ヒアリング',
           duration: '1〜2日',
-          desc: '取り扱うファイル形式・業務フロー・既存ツールをヒアリング。最適な活用シーンと導入規模を一緒に整理します。',
+          desc: '対象工程・想定するロボットや設備・既存のライン構成をヒアリング。最適な活用シーンと導入規模を一緒に整理します。',
         },
         {
           icon: 'Zap',
           title: '無料トライアル',
           duration: '14日間',
-          desc: 'デスクトップアプリをすぐにインストール可能。実データを使って 2D/3D ビューアと AI エージェントの動作を検証いただきます。',
+          desc: 'デスクトップアプリをすぐにインストール可能。実プロジェクトの1ラインを試作しながら、3Dシーン構築とAIエージェントの動作を検証いただきます。',
         },
         {
-          icon: 'Folder',
-          title: '業務フィット検証',
+          icon: 'Cpu',
+          title: 'PoC・業務フィット検証',
           duration: '2〜4週間',
-          desc: '社内フォルダ構成とのすり合わせ、よく使う Python スクリプトの整備、業務に特化した AI 指示プロンプトのチューニングを支援します。',
+          desc: 'シミュレーションでの動作・サイクルタイム検証、社内フォルダ構成とのすり合わせ、よく使うAI指示プロンプトのチューニングを支援します。',
         },
         {
           icon: 'Building',
@@ -1104,7 +1243,7 @@
           </div>
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              AIと共に、モノづくりの新しい働き方を始めよう。
+              AIと共に、ロボット導入を一段速く。
             </h2>
             <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
               あなたの作業PCで動く、Windows 向けデスクトップアプリ。
